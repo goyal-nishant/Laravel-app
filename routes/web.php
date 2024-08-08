@@ -79,7 +79,24 @@ Route::get('/jobs/{id}', function($id) {
 });
 
 Route::get('/{id?}', function(string $id = null) {
-    return view('parameter');
+    return view('parameter', ['id' => $id]);
+})->whereNumber('id');
+
+
+Route::redirect('/test','/');
+
+Route::get('/page', function() {
+    return "<h1>This is only a page</h1>";
+});
+Route::prefix('page')->group(function() {
+    Route::get('/about',function() {
+        return "<h1>This is for about page</h1>";
+    });
+    Route::get('/features', function() {
+        return "<h1>This is feature page</h1>";  
+    });
 });
 
-
+Route::fallback(function() {
+    return "<h1>Page not found</h1>";
+});
