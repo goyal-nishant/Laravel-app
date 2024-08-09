@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Arr;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -109,4 +110,19 @@ Route::middleware(['first', 'second'])->group(function () {
     Route::get('/user/profile', function () {
         return "This is authenticated route by user profile";
     });
+});
+
+
+Route::get('/admin/dashboard', function () {
+    return "Welcome to the admin dashboard!";
+})->middleware('role:admin');
+
+Route::get('/no-access', function () {
+    return "You do not have access to this page.";
+});
+
+
+Route::controller(OrderController::class)->group(function () {
+    Route::get('/orders/{id}', 'show');
+    Route::post('/orders', 'store');
 });
