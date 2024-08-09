@@ -30,6 +30,6 @@ class OrderController extends Controller
 
         $order = DB::table('orders')->where('id', $orderId)->first();
 
-        return response()->json($order, 201);
+        return response()->json($order, 201);   
     }
 }

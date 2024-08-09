@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Arr;
 use App\Http\Controllers\OrderController;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -125,4 +126,16 @@ Route::get('/no-access', function () {
 Route::controller(OrderController::class)->group(function () {
     Route::get('/orders/{id}', 'show');
     Route::post('/orders', 'store');
+});
+
+
+Route::name('admin.')->group(function () {
+    Route::get('/users', function () {
+    return "<h1>This is a Route Name Prefixes</h1>";
+    })->name('users');
+});
+
+
+Route::get('/user-email/{user}', function (User $user) {
+    return $user->email;
 });
