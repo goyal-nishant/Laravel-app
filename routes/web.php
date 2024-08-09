@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Arr;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrderController;
 use App\Models\User;
 
@@ -139,3 +140,5 @@ Route::name('admin.')->group(function () {
 Route::get('/user-email/{user}', function (User $user) {
     return $user->email;
 });
+
+Route::get('/users-detail/{user}', [UserController::class, 'show']);
