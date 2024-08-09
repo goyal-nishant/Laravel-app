@@ -100,3 +100,13 @@ Route::prefix('page')->group(function() {
 Route::fallback(function() {
     return "<h1>Page not found</h1>";
 });
+
+Route::middleware(['first', 'second'])->group(function () {
+    Route::get('/first', function () {
+        return "This is authenticated route";
+    });
+ 
+    Route::get('/user/profile', function () {
+        return "This is authenticated route by user profile";
+    });
+});
