@@ -6,6 +6,7 @@ use Illuminate\Support\Arr;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrderController;
 use App\Models\User;
+use App\Models\Post;
 
 /*
 |--------------------------------------------------------------------------
@@ -142,3 +143,7 @@ Route::get('/user-email/{user}', function (User $user) {
 });
 
 Route::get('/users-detail/{user}', [UserController::class, 'show']);
+
+Route::get('/posts/{post:slug}', function (Post $post) {
+    return view('posts.show', ['post' => $post]);
+});
